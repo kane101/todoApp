@@ -1,0 +1,10 @@
+.banner {
+	background: url(../images/bg-desktop-dark.jpg) center/cover no-repeat;
+	height: 40rem;
+}
+
+.App.lightTheme {
+	.banner {
+		background: url(../images/bg-desktop-light.jpg) center/cover no-repeat;
+	}
+}
