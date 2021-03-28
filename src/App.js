@@ -1,11 +1,13 @@
 import './styles/App.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Sun from './images/icon-sun.svg';
-import Moon from './images/icon-moon.svg';
+import './styles/_base.scss';
 import Banner from './components/Banner';
+import Header from './components/Header';
+import Form from './components/Form';
+import Todos from './components/Todos';
+import Footer from './components/Footer';
 import TodoContainer from './components/TodoContainer';
-import Todo from './components/Todo';
 
 function App() {
 	const [lightTheme, setLightTheme] = useState(false);
@@ -30,14 +32,12 @@ function App() {
 
 	const editTodos = (todoss) => {
 		const newTodos = todoss.map((todoItem) => {
-			if (todoItem.id == editTodo.id) {
+			if (todoItem.id === editTodo.id) {
 				return { ...todoItem, value: input.trim() };
 			}
 			return todoItem;
 		});
-		document
-			.querySelectorAll('.edit')
-			.forEach((item) => item.classList.remove('active'));
+		document.querySelectorAll('.modify').forEach((item) => item.classList.remove('active'));
 		setTodos(newTodos);
 		setEditTodo(null);
 	};
@@ -48,19 +48,16 @@ function App() {
 				setInput(item.value);
 				setEditTodo({ ...item });
 			}
+			return item;
 		});
-		document
-			.querySelectorAll('.edit')
-			.forEach((item) => item.classList.remove('active'));
+		document.querySelectorAll('.modify').forEach((item) => item.classList.remove('active'));
 		e.currentTarget.classList.add('active');
 	};
 
 	const handleCompleted = (todo) => {
 		setTodos(
 			todos.map((item) => {
-				if (item.id == todo.id) {
-					item = { ...item, completed: !item.completed };
-				}
+				if (item.id === todo.id) return { ...item, completed: !item.completed };
 				return item;
 			})
 		);
@@ -78,91 +75,21 @@ function App() {
 		<div className={`App${lightTheme ? ' lightTheme' : ''}`}>
 			<Banner />
 			<TodoContainer>
-				<header className='header' role='banner'>
-					<h1 className='header__logo'>TODO</h1>
-					<div className='header__img' onClick={() => toggleTheme()}>
-						<img src={lightTheme ? Moon : Sun} alt='light theme' />
-					</div>
-				</header>
-
-				<form className='form' onSubmit={(e) => onSubmit(e)}>
-					<button className='form__submit'>+</button>
-					<input
-						className='form__input'
-						placeholder='Create a new todo…'
-						type='text'
-						onChange={onInputChange}
-						value={input}
-					/>
-				</form>
-
-				<main className='todos'>
-					{active === 'all' &&
-						todos.map((todo) => (
-							<Todo
-								todo={todo}
-								handleDelete={handleDelete}
-								handleCompleted={handleCompleted}
-								handleEdit={handleEdit}
-								setEditTodo={setEditTodo}
-								key={todo.id}
-							/>
-						))}
-					{active === 'active' &&
-						todos
-							.filter((todo) => !todo.completed)
-							.map((filteredTodo) => (
-								<Todo
-									todo={filteredTodo}
-									handleDelete={handleDelete}
-									handleCompleted={handleCompleted}
-									handleEdit={handleEdit}
-									setEditTodo={setEditTodo}
-									key={filteredTodo.id}
-								/>
-							))}
-					{active === 'completed' &&
-						todos
-							.filter((todo) => todo.completed)
-							.map((filteredTodo) => (
-								<Todo
-									todo={filteredTodo}
-									handleDelete={handleDelete}
-									handleCompleted={handleCompleted}
-									handleEdit={handleEdit}
-									setEditTodo={setEditTodo}
-									key={filteredTodo.id}
-								/>
-							))}
-				</main>
-
-				<footer className='footer'>
-					<div className='footer__count'>{todos.length} items left</div>
-					<ul className='footer__filter'>
-						<li
-							className={`footer__filter-item ${active === 'all' && 'active'}`}
-							onClick={() => setActive('all')}>
-							All
-						</li>
-						<li
-							className={`footer__filter-item ${
-								active === 'active' && 'active'
-							}`}
-							onClick={() => setActive('active')}>
-							Active
-						</li>
-						<li
-							className={`footer__filter-item ${
-								active === 'completed' && 'active'
-							}`}
-							onClick={() => setActive('completed')}>
-							Completed
-						</li>
-					</ul>
-					<div className='footer__clear-btn' onClick={clearCompleted}>
-						Clear Completed
-					</div>
-				</footer>
+				<Header toggleTheme={toggleTheme} lightTheme={lightTheme} />
+				<Form onSubmit={onSubmit} onInputChange={onInputChange} input={input} />
+				<Todos
+					active={active}
+					todos={todos}
+					handleDelete={handleDelete}
+					handleCompleted={handleCompleted}
+					handleEdit={handleEdit}
+				/>
+				<Footer
+					todos={todos}
+					active={active}
+					setActive={setActive}
+					clearCompleted={clearCompleted}
+				/>
 			</TodoContainer>
 		</div>
 	);

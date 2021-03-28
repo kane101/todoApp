@@ -1,0 +1,14 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5rem;
+	&__logo {
+		color: var(--white);
+		letter-spacing: 1.5rem;
+		font-size: 4rem;
+	}
+	&__img {
+		cursor: pointer;
+	}
+}
