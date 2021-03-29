@@ -4,7 +4,7 @@ import './Todo.scss';
 
 const Todo = ({ todo, handleDelete, handleCompleted, handleEdit }) => {
 	return (
-		<div className={`todo${todo.completed ? ' completed' : ''}`}>
+		<div className={`${todo.completed ? 'todo completed' : 'todo'}`}>
 			<button className='check' onClick={() => handleCompleted(todo)}>
 				<FaCheck size='1.4rem' />
 			</button>

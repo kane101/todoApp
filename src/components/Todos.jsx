@@ -2,11 +2,11 @@ import React from 'react';
 import Todo from './Todo';
 import './Todos.scss';
 
-const Todos = ({ active, todos, handleDelete, handleCompleted, handleEdit }) => {
+const Todos = ({ handleDelete, handleCompleted, handleEdit, fileteredTodos }) => {
 	return (
 		<main className='todos'>
-			{active === 'all' &&
-				todos.map((todo) => (
+			{fileteredTodos.map((todo) => {
+				return (
 					<Todo
 						todo={todo}
 						handleDelete={handleDelete}
@@ -14,31 +14,9 @@ const Todos = ({ active, todos, handleDelete, handleCompleted, handleEdit }) => 
 						handleEdit={handleEdit}
 						key={todo.id}
 					/>
-				))}
-			{active === 'active' &&
-				todos
-					.filter((todo) => !todo.completed)
-					.map((filteredTodo) => (
-						<Todo
-							todo={filteredTodo}
-							handleDelete={handleDelete}
-							handleCompleted={handleCompleted}
-							handleEdit={handleEdit}
-							key={filteredTodo.id}
-						/>
-					))}
-			{active === 'completed' &&
-				todos
-					.filter((todo) => todo.completed)
-					.map((filteredTodo) => (
-						<Todo
-							todo={filteredTodo}
-							handleDelete={handleDelete}
-							handleCompleted={handleCompleted}
-							handleEdit={handleEdit}
-							key={filteredTodo.id}
-						/>
-					))}
+				);
+			})}
+			{fileteredTodos.length === 0 && <p className='empty'>No Items to Display</p>}
 		</main>
 	);
 };

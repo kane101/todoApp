@@ -1,5 +1,5 @@
 import './styles/App.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './styles/_base.scss';
 import Banner from './components/Banner';
@@ -11,8 +11,9 @@ import TodoContainer from './components/TodoContainer';
 
 function App() {
 	const [lightTheme, setLightTheme] = useState(false);
-	const [input, setInput] = useState('');
 	const [todos, setTodos] = useState([]);
+	const [fileteredTodos, setFileteredTodos] = useState([]);
+	const [input, setInput] = useState('');
 	const [editTodo, setEditTodo] = useState(null);
 	const [active, setActive] = useState('all');
 
@@ -71,6 +72,23 @@ function App() {
 		setTodos(todos.filter((todo) => !todo.completed));
 	};
 
+	useEffect(() => {
+		const handleFilter = () => {
+			switch (active) {
+				case 'completed':
+					setFileteredTodos(todos.filter((todo) => todo.completed));
+					break;
+				case 'active':
+					setFileteredTodos(todos.filter((todo) => !todo.completed));
+					break;
+				default:
+					setFileteredTodos(todos);
+					break;
+			}
+		};
+		handleFilter();
+	}, [todos, active]);
+
 	return (
 		<div className={`App${lightTheme ? ' lightTheme' : ''}`}>
 			<Banner />
@@ -83,6 +101,7 @@ function App() {
 					handleDelete={handleDelete}
 					handleCompleted={handleCompleted}
 					handleEdit={handleEdit}
+					fileteredTodos={fileteredTodos}
 				/>
 				<Footer
 					todos={todos}
