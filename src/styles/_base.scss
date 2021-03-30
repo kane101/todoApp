@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
 html {
 	box-sizing: border-box;
 	font-size: 10px;
@@ -16,4 +17,12 @@ body {
 	font-size: 1.8rem;
 	font-family: 'Josefin Sans', sans-serif;
 	min-height: 100vh;
+}
+
+.App {
+	background-color: var(--VeryDarkBlue);
+	min-height: 100vh;
+	&.lightTheme {
+		background-color: var(--white);
+	}
 }

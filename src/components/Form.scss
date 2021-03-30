@@ -2,11 +2,12 @@
 	width: 100%;
 	display: flex;
 	background-color: var(--VeryDarkDesaturatedBlue);
+	box-shadow: 0 3.5rem 5rem -1.5rem rgba(23, 24, 35, 100);
 	border-radius: 0.7rem;
 	height: 6rem;
 	display: flex;
 	align-items: center;
-	padding: 2.4rem;
+	padding: 0 2.4rem;
 	margin-bottom: 5rem;
 	&__submit {
 		width: 2.4rem;
@@ -36,7 +37,28 @@
 		color: var(--LightGrayishBlueHover);
 		font-size: 1.8rem;
 		overflow: hidden;
-		height: 50px;
+		height: inherit;
 		flex: 1;
+	}
+}
+
+.App.lightTheme {
+	.form {
+		background-color: var(--white);
+		box-shadow: 0 3.5rem 5rem -1.5rem rgba(194, 195, 214, 0.5);
+		&__submit {
+			border: 1px solid var(--VeryLightGrayishBlue);
+			&:hover {
+				background-color: var(--BrightBlue);
+				color: var(--VeryDarkDesaturatedBlue);
+				border: 1px solid var(--BrightBlue);
+			}
+		}
+		&__input[type='text'] {
+			color: var(--VeryDarkDesaturatedBlue);
+			&::placeholder {
+				color: var(--DarkGrayishBlue);
+			}
+		}
 	}
 }

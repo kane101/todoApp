@@ -1,7 +1,5 @@
-import './styles/App.scss';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import './styles/_base.scss';
 import Banner from './components/Banner';
 import Header from './components/Header';
 import Form from './components/Form';

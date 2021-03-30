@@ -1,12 +1,12 @@
 import React from 'react';
-import { FaCheck, FaEdit, FaTimesCircle } from 'react-icons/fa';
+import { FaCheck, FaEdit, FaTimes } from 'react-icons/fa';
 import './Todo.scss';
 
 const Todo = ({ todo, handleDelete, handleCompleted, handleEdit }) => {
 	return (
 		<div className={`${todo.completed ? 'todo completed' : 'todo'}`}>
 			<button className='check' onClick={() => handleCompleted(todo)}>
-				<FaCheck size='1.4rem' />
+				<FaCheck size='1rem' />
 			</button>
 			<p>{todo.value}</p>
 			<div className='buttons'>
@@ -14,7 +14,7 @@ const Todo = ({ todo, handleDelete, handleCompleted, handleEdit }) => {
 					<FaEdit size='2.3rem' />
 				</button>
 				<button className='button' onClick={() => handleDelete(todo)}>
-					<FaTimesCircle size='2.3rem' />
+					<FaTimes size='2.3rem' />
 				</button>
 			</div>
 		</div>

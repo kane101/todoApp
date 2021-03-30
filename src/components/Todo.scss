@@ -47,7 +47,7 @@
 		letter-spacing: 0.1rem;
 		flex: 1;
 		margin-right: 2.4rem;
-		color: var(--white);
+		color: var(--LightGrayishBlue);
 	}
 	.buttons {
 		display: flex;
@@ -89,7 +89,60 @@
 	}
 	p {
 		color: var(--VeryDarkGrayishBlue);
-		font-weight: 700;
 		text-decoration: line-through;
+	}
+}
+
+.App.lightTheme {
+	.empty {
+		color: var(--VeryDarkGrayishBlue);
+	}
+	.todo {
+		color: var(--DarkGrayishBlue);
+		border-bottom: 1px solid var(--VeryLightGrayishBlue);
+		.check {
+			border: 1px solid var(--VeryLightGrayishBlue);
+			&:hover {
+				border: 1px solid transparent;
+				background-image: radial-gradient(circle at top left, var(--white), var(--white)),
+					linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+			}
+			svg {
+				fill: var(--white);
+			}
+		}
+		p {
+			color: var(--VeryDarkGrayishBlue);
+		}
+		.buttons {
+			button {
+				svg {
+					fill: var(--DarkGrayishBlue);
+				}
+				&:hover svg {
+					fill: var(--VeryDarkGrayishBlue);
+				}
+				&.active svg {
+					fill: var(--VeryDarkGrayishBlue);
+				}
+				&:last-of-type {
+					margin-left: 2rem;
+				}
+			}
+		}
+	}
+
+	.empty {
+		color: var(--DarkGrayishBlue);
+	}
+
+	.todo.completed {
+		.check {
+			background: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+			border: none;
+		}
+		p {
+			color: var(--LightGrayishBlue);
+		}
 	}
 }
